@@ -1,0 +1,53 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    text-align: center;
+    padding: 2em;
+    background-color: hsl(271, 40%, 53%);
+}
+
+main{
+    display: flex;
+    justify-content: space-around;
+}
+
+.note{
+    background-color: hsl(180, 50%, 50%);
+    padding: 2em;
+}
+.note > p{
+    background-color: hsl(0, 78%, 79%);
+    padding: 1em;
+}
+
+.note h1{
+    text-transform: capitalize;
+}
+
+.creationDate{
+    padding-top: 1em;
+}
+
+::backdrop {
+background-color: red;
+opacity: .75;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+
+}
+
+dialog {
+    width: 75%;
+    height: 75%
+}
+
+textarea {
+    height: 10em;
+}
