@@ -22,5 +22,12 @@ jobs:
             # Log out from the Docker registry at the end of a job
             logout: true 
         
-          
-  
+        - name: Build and push Docker images
+          uses: docker/build-push-action@v6.15.0
+          with:
+            # Path to the Dockerfile
+            file: ./Dockerfile
+            # Push is a shorthand for --output=type=registry
+            push: true # optional, default is false
+            # List of tags
+            tags: git.sethsamuel.online/fluffy/mission_ready_mission2
