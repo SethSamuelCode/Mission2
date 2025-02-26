@@ -24,6 +24,6 @@ jobs:
           run: echo "hello world"
           
         - name: echo secret
-          run: echo ${{ secret.TEST_SECRET }} 
+          run: echo ${{ secrets.TEST_SECRET }} 
           
   
