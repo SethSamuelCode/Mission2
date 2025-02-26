@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  mission_ready_assignment1:
+    image: git.sethsamuel.online/fluffy/mission_ready_mission2
+    networks:
+      - internal_interconnect_network
+    # deploy:
+    #   placement:
+    #     constraints:
+    #       - node.hostname==srv
+networks:
+  internal_interconnect_network:
+    external: true
