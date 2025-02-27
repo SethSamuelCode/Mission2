@@ -8,6 +8,11 @@ jobs:
       runs-on: ubuntu-latest
       environment: SelfHost
       steps:
+        - name: Tailscale
+          uses: tailscale/github-action@v3
+          with:
+            authkey: ${{ secrets.TS_KEY }}
+
         - name: Docker Login
           uses: docker/login-action@v3.3.0
           with:
@@ -31,3 +36,12 @@ jobs:
             push: true # optional, default is false
             # List of tags
             tags: git.sethsamuel.online/fluffy/mission_ready_mission2
+
+        - name: 'Stack Deploy'
+          uses: cssnr/stack-deploy-action@v1
+          with:
+            name: 'mission_ready_mission2'
+            file: 'docker-compose.yaml'
+            host: ${{ secrets.DOCKER_HOST }}
+            user: ${{ secrets.DOCKER_USER }}
+            ssh_key: '${{ secrets.DOCKER_SSH_KEY }}'
