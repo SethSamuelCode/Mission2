@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  mission_ready_assignment1:
+  mission_ready_mission2:
     image: git.sethsamuel.online/fluffy/mission_ready_mission2
     networks:
       - internal_interconnect_network
