@@ -50,7 +50,7 @@ fieldset {
 
 }
 
-dialog {
+#newNoteDialog {
     width: 75%;
     height: 75%;
     /* center modal */
@@ -65,20 +65,31 @@ dialog {
 nav ul{
     list-style: none;
     display: flex;
+    flex-direction: column;
+
+}
+.navElement{
+    display: block;
+    padding: 1em;
 }
 
 
 #newNoteButton{
-    width: 100%;
+    /* width: 100%; */
     /* height: 5dvb; */
     cursor: pointer;
     /* border: solid 1px red; */
-    padding: 1em;
-    display: block;
+
+
 }
 
 #newNoteButton:hover {
     background-color: rgb(250, 167, 167);
+}
+
+#sortForm{
+    display: flex;
+    flex-direction: column;
 }
 
 textarea {

@@ -15,7 +15,19 @@
     <div id="containerDiv">
       <nav>
         <ul>
-          <li><p id="newNoteButton" >New Note</p></li>
+          <li><p id="newNoteButton" class="navElement" >New Note</p></li>
+          <li>
+            <form method="dialog" class="navElement" id="sortForm">
+              <label for="sortBySelect">sort by:</label>
+              <select name="sortBySelect" id="sortBySelect">
+                <option value="newest"> Newest first</option>
+                <option value="oldest"> Oldest first</option>
+                <option value="a-z"> Title a->z</option>
+                <option value="z-a"> Title z->a</option>                
+              </select>
+              <input type="submit" value="sort">
+            </form>
+          </li>
         </ul>
       </nav>
       <!-- main where the notes go -->
