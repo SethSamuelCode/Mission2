@@ -17,6 +17,8 @@ testNote = new Note("tittle", "this is some text");
 notebook.set(testNote.tittle, testNote);
 testNote = new Note("tittle again", "this is text is bomb");
 notebook.set(testNote.tittle, testNote);
+testNote = new Note("3RD note", "this is the text for the 3rd note");
+notebook.set(testNote.tittle, testNote);
 
 let mainDiv = document.getElementsByTagName("main")[0]; //get main element
 
