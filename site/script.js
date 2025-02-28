@@ -1,8 +1,8 @@
-class Note {
-  constructor(tittle, text) {
+class Note { //class for notes 
+  constructor(tittle, text) { //takes title and note content 
     this.tittle = tittle;
     this.note = text;
-    this.creationTime = new Date();
+    this.creationTime = new Date(); //sets the creation time at note creation
   }
 }
 
@@ -12,15 +12,15 @@ class Note {
 //   element.style.height = (element.scrollHeight) + "px";
 // }
 
-notebook = new Map();
-testNote = new Note("tittle", "this is some text");
-notebook.set(testNote.tittle, testNote);
-testNote = new Note("tittle again", "this is text is bomb");
-notebook.set(testNote.tittle, testNote);
-testNote = new Note("3RD note", "this is the text for the 3rd note");
-notebook.set(testNote.tittle, testNote);
+const notebook = [] //stores the notes
+//generate some test data
+notebook.push(new Note("tittle", "this is some text"));
+notebook.push(new Note("tittle again", "this is text is bomb"));
+notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
 
 let mainDiv = document.getElementsByTagName("main")[0]; //get main element
+
+
 
 for (let x of notebook.values()) {
   console.log(
@@ -31,6 +31,8 @@ for (let x of notebook.values()) {
       "\ncreated on: " +
       x.creationTime
   );
+
+  console.log(JSON.stringify(x))
 
   // div to hold the note
   let div = document.createElement("div");
