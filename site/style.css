@@ -12,16 +12,19 @@ header{
 
 #containerDiv{
     display: flex;
+    justify-content: flex-start;
 }
 
 main{
     display: flex;
     justify-content: space-around;
+    flex-grow: 1;
 }
 
 .note{
     background-color: hsl(180, 50%, 50%);
     padding: 2em;
+    
 }
 .note > p{
     background-color: hsl(0, 78%, 79%);
