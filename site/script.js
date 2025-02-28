@@ -1,7 +1,9 @@
 // ----------------------- OBJECTS ---------------------- //
 
-class Note { //class for notes 
-  constructor(tittle, text) { //takes title and note content 
+class Note {
+  //class for notes
+  constructor(tittle, text) {
+    //takes title and note content
     this.tittle = tittle;
     this.note = text;
     this.creationTime = new Date(); //sets the creation time at note creation
@@ -10,6 +12,8 @@ class Note { //class for notes
 
 // ------------------- HTML SELECTORS ------------------- //
 const mainDiv = document.getElementsByTagName("main")[0]; //get main element
+const newNoteDialog = document.querySelector("dialog");
+const newNoteButton = document.getElementById("newNoteButton");
 
 // https://stackoverflow.com/a/24676492
 // function auto_grow(element) {
@@ -17,22 +21,13 @@ const mainDiv = document.getElementsByTagName("main")[0]; //get main element
 //   element.style.height = (element.scrollHeight) + "px";
 // }
 
-const notebook = [] //stores the notes
-//generate some test data
-notebook.push(new Note("tittle", "this is some text"));
-notebook.push(new Note("tittle again", "this is text is bomb"));
-notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
+// ------------------ GLOBAL VARIABLES ------------------ //
 
+const notebook = []; //stores the notes
 
+// ---------------------- FUNCTIONS ---------------------- //
 
-
-const newNoteDialog = document.querySelector("dialog");
-const newNoteButton = document.getElementById("newNoteButton");
-newNoteButton.addEventListener("click", () => {
-newNoteDialog.showModal();
-});
-
-function draw(){
+function draw() {
   for (let note of notebook.values()) {
     console.log(
       "tittle: " +
@@ -42,10 +37,10 @@ function draw(){
         "\ncreated on: " +
         note.creationTime
     );
-  
-    console.log(JSON.stringify(note))
-  
-// ------------------- CREATE NOTE IN HTML ------------------ //
+
+    console.log(JSON.stringify(note));
+
+    // ------------------- CREATE NOTE IN HTML ------------------ //
 
     // div to hold the note
     const div = document.createElement("div");
@@ -65,9 +60,9 @@ function draw(){
     //creation date
     const creationDate = document.createElement("p");
     creationDate.insertAdjacentText("afterbegin", note.creationTime);
-  
+
     //append everything in order
-    div.append(h1);  
+    div.append(h1);
     div.append(content);
     creationDateDiv.append(labelForCreationDate);
     creationDateDiv.append(creationDate);
@@ -75,5 +70,20 @@ function draw(){
     mainDiv.append(div);
   }
 }
+
+// ------------------- EVENT LISTENERS ------------------ //
+
+newNoteButton.addEventListener("click", () => { //open the new note modal
+  document.querySelector("dialog input").value = ""; //clear title on modal open
+  document.querySelector("dialog textarea").value = "" //clear text area on modal open
+  newNoteDialog.showModal();
+});
+
+// ------------------ SCRIPT ENTRYPOINT ----------------- //
+
+//generate some test data
+notebook.push(new Note("tittle", "this is some text"));
+notebook.push(new Note("tittle again", "this is text is bomb"));
+notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
 
 draw(); //draw the webpage on first load
