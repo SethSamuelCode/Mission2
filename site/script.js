@@ -24,14 +24,19 @@ const notebook = []; //stores the notes
 
 // ------------------- HTML SELECTORS ------------------- //
 const mainDiv = document.getElementsByTagName("main")[0]; //get main element
-const newNoteDialog = document.querySelector("dialog");
+const newNoteDialog = document.querySelector("#newNoteDialog");
 const newNoteButton = document.getElementById("newNoteButton");
-const newNoteTitle = document.querySelector("dialog input");
-const newNoteContents = document.querySelector("dialog textarea")
+const newNoteTitle = document.querySelector("#newNoteDialog input");
+const newNoteContents = document.querySelector("#newNoteDialog textarea")
+const newNoteDialogSaveButton = document.querySelector("#newNoteDialog button");
+
 
 // ---------------------- FUNCTIONS ---------------------- //
 
 function draw() {
+
+  mainDiv.innerHTML=""; //clear main div for redraw 
+
   for (let note of notebook.values()) {
     console.log(
       "tittle: " +
@@ -81,6 +86,11 @@ newNoteButton.addEventListener("click", () => { //open the new note modal
   newNoteTitle.value = ""; //clear title on modal open
   newNoteContents.value = "" //clear text area on modal open
   newNoteDialog.showModal();
+});
+
+newNoteDialogSaveButton.addEventListener("click", () =>{
+  notebook.push(new Note(newNoteTitle.value,newNoteContents.value));
+  draw()
 });
 
 // ------------------ SCRIPT ENTRYPOINT ----------------- //
