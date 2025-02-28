@@ -2,9 +2,9 @@
 
 class Note {
   //class for notes
-  constructor(tittle, text) {
+  constructor(title, text) {
     //takes title and note content
-    this.tittle = tittle;
+    this.title = title;
     this.note = text;
     this.creationTime = new Date(); //sets the creation time at note creation
   }
@@ -29,6 +29,8 @@ const newNoteButton = document.getElementById("newNoteButton");
 const newNoteTitle = document.querySelector("#newNoteDialog input");
 const newNoteContents = document.querySelector("#newNoteDialog textarea")
 const newNoteDialogSaveButton = document.querySelector("#newNoteDialog button");
+const sortButton = document.querySelector("#sortForm input");
+const sortDirection = document.querySelector("#sortBySelect")
 
 
 // ---------------------- FUNCTIONS ---------------------- //
@@ -39,8 +41,8 @@ function draw() {
 
   for (let note of notebook.values()) {
     console.log(
-      "tittle: " +
-        note.tittle +
+      "title: " +
+        note.title +
         "\ncontents: " +
         note.note +
         "\ncreated on: " +
@@ -54,9 +56,9 @@ function draw() {
     // div to hold the note
     const div = document.createElement("div");
     div.className = "note";
-    //note tittle
+    //note title
     const h1 = document.createElement("h1");
-    h1.insertAdjacentText("afterbegin", note.tittle);
+    h1.insertAdjacentText("afterbegin", note.title);
     //note content
     const content = document.createElement("p");
     content.insertAdjacentText("afterbegin", note.note);
@@ -93,11 +95,29 @@ newNoteDialogSaveButton.addEventListener("click", () =>{
   draw()
 });
 
+sortButton.addEventListener("click",()=>{
+  // console.log("button click");
+  switch (sortDirection.value){
+  case "a-z": notebook.sort((a,b)=>{ //sort by Title A-Z
+    return a.title.localeCompare(b.title);
+  }) ;
+  break;
+  case "z-a": notebook.sort((a,b)=>{ //sort by Title Z-A
+    return b.title.localeCompare(a.title) 
+  });
+  break;
+  case newest: notebook.sort((a,b)=>{
+    return 
+  })
+}
+  draw()
+})
+
 // ------------------ SCRIPT ENTRYPOINT ----------------- //
 
 //generate some test data
-notebook.push(new Note("tittle", "this is some text"));
-notebook.push(new Note("tittle again", "this is text is bomb"));
+notebook.push(new Note("title", "this is some text"));
+notebook.push(new Note("title again", "this is text is bomb"));
 notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
 
 draw(); //draw the webpage on first load
