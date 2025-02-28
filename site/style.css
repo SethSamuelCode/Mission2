@@ -45,7 +45,20 @@ fieldset {
 
 dialog {
     width: 75%;
-    height: 75%
+    height: 75%;
+    /* center modal */
+    /* this is needed as padding and border is set to 0 initially */
+    /* https://stackoverflow.com/a/39636815 */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#newNoteButton{
+    width: 100%;
+    height: 5dvb;
+    min-height: 2em;
 }
 
 textarea {
