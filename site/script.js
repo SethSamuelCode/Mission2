@@ -10,10 +10,7 @@ class Note {
   }
 }
 
-// ------------------- HTML SELECTORS ------------------- //
-const mainDiv = document.getElementsByTagName("main")[0]; //get main element
-const newNoteDialog = document.querySelector("dialog");
-const newNoteButton = document.getElementById("newNoteButton");
+
 
 // https://stackoverflow.com/a/24676492
 // function auto_grow(element) {
@@ -24,6 +21,13 @@ const newNoteButton = document.getElementById("newNoteButton");
 // ------------------ GLOBAL VARIABLES ------------------ //
 
 const notebook = []; //stores the notes
+
+// ------------------- HTML SELECTORS ------------------- //
+const mainDiv = document.getElementsByTagName("main")[0]; //get main element
+const newNoteDialog = document.querySelector("dialog");
+const newNoteButton = document.getElementById("newNoteButton");
+const newNoteTitle = document.querySelector("dialog input");
+const newNoteContents = document.querySelector("dialog textarea")
 
 // ---------------------- FUNCTIONS ---------------------- //
 
@@ -74,8 +78,8 @@ function draw() {
 // ------------------- EVENT LISTENERS ------------------ //
 
 newNoteButton.addEventListener("click", () => { //open the new note modal
-  document.querySelector("dialog input").value = ""; //clear title on modal open
-  document.querySelector("dialog textarea").value = "" //clear text area on modal open
+  newNoteTitle.value = ""; //clear title on modal open
+  newNoteContents.value = "" //clear text area on modal open
   newNoteDialog.showModal();
 });
 
