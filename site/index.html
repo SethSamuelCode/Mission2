@@ -11,36 +11,34 @@
     <header>
       <h1>Notebook</h1>
     </header>
-    <main></main>
 
-    <!-- <div class="note">
-        <h1>tittle</h1>
-        <p>content</p>
-        <p class="creationDate"></p>
-    </div> -->
+    <div id="containerDiv">
+      <nav>
+        <ul>
+          <li><p id="newNoteButton" >New Note</p></li>
+        </ul>
+      </nav>
+      <!-- main where the notes go -->
+      <main></main> 
+    </div>
 
-    
-
-    <!-- <script>
-        document.getElementById("pTag").innerHTML = "Hello World!";
-    </script> -->
-
-    <!-- new note dialog -->
-
-    
-
-    <dialog id="newNoteDialog" >
+    <dialog id="newNoteDialog">
       <form method="dialog">
         <fieldset>
           <legend>New Note</legend>
           <label>Title:</label>
-          <input type="text" name="title" required placeholder="Title" autofocus />
+          <input
+            type="text"
+            name="title"
+            required
+            placeholder="Title"
+            autofocus
+          />
           <label>Note:</label>
           <textarea name="note" placeholder="What is your note?"> </textarea>
           <button type="submit">Save</button>
         </fieldset>
       </form>
     </dialog>
-    <button id="newNoteButton">New Note</button>
   </body>
 </html>
