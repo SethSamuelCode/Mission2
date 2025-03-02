@@ -107,7 +107,9 @@ nav ul{
 }
 #sortBySelect{
     padding: .5em;
-
+    border-radius: .25em;
+    border: none;
+    font-size: 1em;
 
 }
 
@@ -125,6 +127,8 @@ nav ul{
     cursor: pointer;
     border: solid 1px red;
     background-color: var(--color-note);
+    font-size: 1.4em;
+    padding: .5em;
 
 
 }
