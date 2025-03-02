@@ -30,7 +30,7 @@ jobs:
           uses: docker/build-push-action@v6.15.0
           with:
             # Path to the Dockerfile
-            file: ./Dockerfile
+            file: /docker/Dockerfile
             # Push is a shorthand for --output=type=registry
             push: true # optional, default is false
             # List of tags
@@ -54,7 +54,7 @@ jobs:
           uses: cssnr/stack-deploy-action@v1
           with:
             name: 'mission_ready_mission2'
-            file: 'docker-compose.yml'
+            file: 'docker/docker-compose.yml'
             host: ${{ secrets.DOCKER_HOST }}
             user: ${{ secrets.DOCKER_USER }}
             ssh_key: '${{ secrets.DOCKER_SSH_KEY }}'
