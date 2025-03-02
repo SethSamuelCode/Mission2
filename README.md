@@ -8,7 +8,7 @@ website can be found under /site
 ## MISSION 2 REQUIREMENTS 
 
 |Requirement|Completed|
-|:---:|:---:|
+|:---|:---:|
 |Declare variables using let or const |✅|
 |Use of Functions |✅|
 |Use of document.getElementById() or document.querySelector() to change or display the values/styles/attributes of the original HTML |✅|
