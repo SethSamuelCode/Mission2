@@ -21,16 +21,19 @@ class Note {
 // ------------------ GLOBAL VARIABLES ------------------ //
 
 const notebook = []; //stores the notes
+let db; //for indexedDB
+const dbName = "notesDB"; //indexedDB database name
+const objectStoreNameNotes = "notebookObjectStore"; //indexedDB datastore name to store notes
 
 // ------------------- HTML SELECTORS ------------------- //
 const mainDiv = document.getElementsByTagName("main")[0]; //get main element
-const newNoteDialog = document.querySelector("#newNoteDialog");
-const newNoteButton = document.getElementById("newNoteButton");
-const newNoteTitle = document.querySelector("#newNoteDialog input");
-const newNoteContents = document.querySelector("#newNoteDialog textarea")
-const newNoteDialogSaveButton = document.querySelector("#newNoteDialog button");
-const sortButton = document.querySelector("#sortForm input");
-const sortDirection = document.querySelector("#sortBySelect")
+const newNoteDialog = document.querySelector("#newNoteDialog"); //get dialog element for new notes
+const newNoteButton = document.getElementById("newNoteButton"); // new note button on main page
+const newNoteTitle = document.querySelector("#newNoteDialog input"); //new note title in new note dialog
+const newNoteContents = document.querySelector("#newNoteDialog textarea") //new note contents in new note dialog
+const newNoteDialogSaveButton = document.querySelector("#newNoteDialog button");//save button in new note dialog 
+const sortButton = document.querySelector("#sortForm input"); //sort button on main page
+const sortDirection = document.querySelector("#sortBySelect") //sort type dropdown 
 
 
 // ---------------------- FUNCTIONS ---------------------- //
@@ -82,7 +85,60 @@ function draw() {
   }
 }
 
-// ------------------- EVENT LISTENERS ------------------ //
+function connectToDB(){ //connect to indexedDB for saving and loading notes
+  const openRequest = window.indexedDB.open(dbName,1);
+
+  openRequest.addEventListener("error",()=>{
+    console.log("IndexedDB failed to open")
+  });
+
+  openRequest.addEventListener("success",()=>{ //connects successfully with out issue
+    console.log("IndexedDB opened successfully")
+    db = openRequest.result; //so we can use the IndexedDB later
+    loadFromDB()
+    draw()
+  });
+
+  openRequest.addEventListener("upgradeneeded",(e)=>{ //connects but db is either not created or needs to be updated
+    db = e.target.result;
+    const objectStore = db.createObjectStore(objectStoreNameNotes,{keypath: "creationTime"}) //create an object store with the object store name
+
+    objectStore.createIndex("note","note"); //create an index in the object store called "note" to be accessed the param "IDBCursorObject.value"
+
+    console.log("IndexedDB setup complete")
+    draw(); //draw webpage
+  })
+}
+
+function loadFromDB(){ //load data from IndexedDB
+  const objectStore = db.transaction(objectStoreNameNotes).objectStore(objectStoreNameNotes);
+  objectStore.openCursor().addEventListener("success",(e)=>{
+    const cursor = e.target.result;
+
+    if(cursor){
+      notebook.push(cursor.value);
+      cursor.continue();
+    } 
+  })
+  draw()
+}
+
+function saveToDB(newNote){
+  const transaction = db.transaction([objectStoreNameNotes],"readwrite"); //set up a transaction to handle the status events 
+  const objectStore = transaction.objectStore(objectStoreNameNotes); //specify the object store to access 
+  const addRequest = objectStore.add(newNote,newNote.creationTime); //use the transaction to generate a request to add the new note to the IndexedDB
+
+  transaction.addEventListener("complete",()=>{
+    console.log(`Note: ${newNote.title} saved to IndexedDB`);
+  })
+
+  transaction.addEventListener("error",()=>{
+    alert(`Note: ${newNote.title} not saved.\nYou will loose the note on browser refresh`)
+  })
+
+}
+
+// -------------------GLOBAL EVENT LISTENERS ------------------ //
 
 newNoteButton.addEventListener("click", () => { //open the new note modal
   newNoteTitle.value = ""; //clear title on modal open
@@ -90,8 +146,11 @@ newNoteButton.addEventListener("click", () => { //open the new note modal
   newNoteDialog.showModal();
 });
 
-newNoteDialogSaveButton.addEventListener("click", () =>{ //button to save the note in the new note modal
-  notebook.push(new Note(newNoteTitle.value,newNoteContents.value));
+newNoteDialogSaveButton.addEventListener("click", (e) =>{ //button to save the note in the new note modal
+  // e.preventDefault();//stop the window closing if the note doesnt save to IndexedDB
+  const tempNote = new Note(newNoteTitle.value,newNoteContents.value);
+  notebook.push(tempNote); //save note into working array
+  saveToDB(tempNote); //save temp note into IndexedDB
   draw()
 });
 
@@ -123,8 +182,9 @@ sortButton.addEventListener("click",()=>{ //sorting functions
 // ------------------ SCRIPT ENTRYPOINT ----------------- //
 
 //generate some test data
-notebook.push(new Note("title", "this is some text"));
-notebook.push(new Note("title again", "this is text is bomb"));
-notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
+// notebook.push(new Note("title", "this is some text"));
+// notebook.push(new Note("title again", "this is text is bomb"));
+// notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
 
-draw(); //draw the webpage on first load
+connectToDB();
+
