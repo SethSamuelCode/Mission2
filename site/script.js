@@ -107,11 +107,14 @@ sortButton.addEventListener("click",()=>{
   });
   break;
   case "newest": notebook.sort((a,b)=>{ //sort by newest note first
-    return b.creationTime - a.creationTime;//"b" goes first because the Date object stores the time as Unix time. thus an object created later will have a bigger number. since we want the biggest "time value" to be first a bigger number minus a smaller number will create a positive value meaning when it is returned "a" will be placed ahead of "b" .
+    console.log(b.creationTime - a.creationTime)
+    return (b.creationTime - a.creationTime)//"b" goes first because the Date object stores the time as Unix time. thus an object created later will have a bigger number. since we want the biggest "time value" to be first a bigger number minus a smaller number will create a positive value meaning when it is returned "a" will be placed ahead of "b" .
   })
+  break;
   case "oldest": notebook.sort((a,b)=>{
     return a.creationTime - b.creationTime; //opposite of above 
   })
+  break;
 
 }
   draw()
