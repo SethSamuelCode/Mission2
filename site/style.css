@@ -44,6 +44,7 @@ main{
     background-color: var(--color-note);
     padding: 2em;
     border-radius:2em ;
+    margin: .25em
     
 }
 .note > p{
@@ -68,6 +69,13 @@ fieldset {
     display: flex;
     flex-direction: column;
 
+
+}
+
+form{
+    padding: .5em;
+    padding-top: 1em;
+
 }
 
 #newNoteDialog {
@@ -80,6 +88,7 @@ fieldset {
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    border-radius: 1em;
 }
 
 nav{
@@ -95,6 +104,18 @@ nav ul{
 .navElement{
     display: block;
     padding: 1em;
+}
+#sortBySelect{
+    padding: .5em;
+
+
+}
+
+.textInput{
+    padding: .5em;
+    margin: .25em 0;
+    border-radius: .5em;
+    border: 1px solid black;
 }
 
 
@@ -115,10 +136,11 @@ nav ul{
     font-size: 1em;
     font-weight: 800;
     color: whitesmoke;
-    position: relative;
-    bottom: 0;
-    left: 0;
-
+    border-radius: 1em;
+}
+.noteEditButton:hover{
+    opacity: 80%;
+    cursor: pointer;
 }
 #noteEditSaveButton{
     background-color: hsl(120, 100%, 25%);
@@ -139,6 +161,7 @@ nav ul{
 
 textarea {
     height: 18em;
+
 }
 
 @media all and (max-width: 750px) {
