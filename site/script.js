@@ -40,16 +40,16 @@ function draw() {
   mainDiv.innerHTML=""; //clear main div for redraw 
 
   for (let note of notebook.values()) {
-    console.log(
-      "title: " +
-        note.title +
-        "\ncontents: " +
-        note.note +
-        "\ncreated on: " +
-        note.creationTime
-    );
+    // console.log(
+    //   "title: " +
+    //     note.title +
+    //     "\ncontents: " +
+    //     note.note +
+    //     "\ncreated on: " +
+    //     note.creationTime
+    // );
 
-    console.log(JSON.stringify(note));
+    // console.log(JSON.stringify(note));
 
     // ------------------- CREATE NOTE IN HTML ------------------ //
 
@@ -106,9 +106,13 @@ sortButton.addEventListener("click",()=>{
     return b.title.localeCompare(a.title) 
   });
   break;
-  case newest: notebook.sort((a,b)=>{
-    return 
+  case "newest": notebook.sort((a,b)=>{ //sort by newest note first
+    return b.creationTime - a.creationTime;//"b" goes first because the Date object stores the time as Unix time. thus an object created later will have a bigger number. since we want the biggest "time value" to be first a bigger number minus a smaller number will create a positive value meaning when it is returned "a" will be placed ahead of "b" .
   })
+  case "oldest": notebook.sort((a,b)=>{
+    return a.creationTime - b.creationTime; //opposite of above 
+  })
+
 }
   draw()
 })
