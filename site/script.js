@@ -73,7 +73,7 @@ function draw() {
     labelForCreationDate.insertAdjacentText("afterbegin", "Creation Date: ");
     //creation date
     const creationDate = document.createElement("p");
-    creationDate.insertAdjacentText("afterbegin", note.creationTime);
+    creationDate.insertAdjacentText("afterbegin", note.creationTime.toLocaleString());
 
     //append everything in order
     div.append(h1);
@@ -187,4 +187,7 @@ sortButton.addEventListener("click",()=>{ //sorting functions
 // notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
 
 connectToDB();
+
+//set fonts
+document.querySelector("body").className= "noto-serif-georgian-body";
 

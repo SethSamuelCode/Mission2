@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
-    <title>Notebook Practice</title>
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@100..900&display=swap" rel="stylesheet"><title>Notebook Mission1</title>
   </head>
   <body>
     <header>
@@ -15,25 +18,25 @@
     <div id="containerDiv">
       <nav>
         <ul>
-          <li><p id="newNoteButton" class="navElement" >New Note</p></li>
+          <li><p id="newNoteButton" class="navElement">New Note</p></li>
           <li>
             <form method="dialog" class="navElement" id="sortForm">
               <label for="sortBySelect">sort by:</label>
               <select name="sortBySelect" id="sortBySelect">
-                <option value="newest"> Newest first</option>
-                <option value="oldest"> Oldest first</option>
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
                 <!-- is not ascending and descending because i get confused between them when 
                  using letters   -->
-                <option value="a-z"> Title a->z</option> 
-                <option value="z-a"> Title z->a</option>                
+                <option value="a-z">Title a->z</option>
+                <option value="z-a">Title z->a</option>
               </select>
-              <input type="submit" value="sort">
+              <input type="submit" value="sort" />
             </form>
           </li>
         </ul>
       </nav>
       <!-- main where the notes go -->
-      <main></main> 
+      <main></main>
     </div>
 
     <dialog id="newNoteDialog">
