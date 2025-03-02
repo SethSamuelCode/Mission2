@@ -34,6 +34,7 @@ const newNoteContents = document.querySelector("#newNoteDialog textarea") //new 
 const newNoteDialogSaveButton = document.querySelector("#noteEditSaveButton");//save button in new note dialog 
 const sortButton = document.querySelector("#sortForm input"); //sort button on main page
 const sortDirection = document.querySelector("#sortBySelect") //sort type dropdown 
+const noteEditCancelButton = document.querySelector("#noteEditCancelButton")//cancel button in note edit dialog
 
 
 // ---------------------- FUNCTIONS ---------------------- //
@@ -179,6 +180,11 @@ sortDirection.addEventListener("click",()=>{
 
 }
   draw()
+})
+
+noteEditCancelButton.addEventListener("click",(e)=>{
+  e.preventDefault()// stop the form from being submitted
+  newNoteDialog.close();
 })
 
 // ------------------ SCRIPT ENTRYPOINT ----------------- //
