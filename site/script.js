@@ -155,7 +155,8 @@ newNoteDialogSaveButton.addEventListener("click", (e) =>{ //button to save the n
   draw()
 });
 
-sortButton.addEventListener("click",()=>{ //sorting functions
+// sortButton.addEventListener("click",()=>{ //sorting functions
+sortDirection.addEventListener("click",()=>{
 
   switch (sortDirection.value){
   case "a-z": notebook.sort((a,b)=>{ //sort by Title A-Z
