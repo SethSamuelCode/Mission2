@@ -31,7 +31,7 @@ const newNoteDialog = document.querySelector("#newNoteDialog"); //get dialog ele
 const newNoteButton = document.getElementById("newNoteButton"); // new note button on main page
 const newNoteTitle = document.querySelector("#newNoteDialog input"); //new note title in new note dialog
 const newNoteContents = document.querySelector("#newNoteDialog textarea") //new note contents in new note dialog
-const newNoteDialogSaveButton = document.querySelector("#newNoteDialog button");//save button in new note dialog 
+const newNoteDialogSaveButton = document.querySelector("#noteEditSaveButton");//save button in new note dialog 
 const sortButton = document.querySelector("#sortForm input"); //sort button on main page
 const sortDirection = document.querySelector("#sortBySelect") //sort type dropdown 
 
