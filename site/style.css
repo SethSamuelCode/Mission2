@@ -6,8 +6,9 @@
 
 header{
     text-align: center;
-    padding: 2em;
+    padding: 1em 2em;
     background-color: hsl(271, 40%, 53%);
+    font-size: 2em;
 }
 
 #containerDiv{
@@ -19,6 +20,7 @@ main{
     display: flex;
     justify-content: space-around;
     flex-grow: 1;
+    padding-top: 2em;
 }
 
 .note{
@@ -62,6 +64,10 @@ fieldset {
     transform: translate(-50%,-50%);
 }
 
+nav{
+    border-right: solid red 1px;
+}
+
 nav ul{
     list-style: none;
     display: flex;
@@ -78,7 +84,8 @@ nav ul{
     /* width: 100%; */
     /* height: 5dvb; */
     cursor: pointer;
-    /* border: solid 1px red; */
+    border: solid 1px red;
+    background-color: ;
 
 
 }
