@@ -121,6 +121,7 @@ function loadFromDB(){ //load data from IndexedDB
     } 
   })
   draw()
+  
 }
 
 function saveToDB(newNote){

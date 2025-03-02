@@ -37,6 +37,7 @@ main{
     justify-content: space-around;
     flex-grow: 1;
     padding-top: 2em;
+    flex-wrap: wrap;
 }
 
 .note{
@@ -118,4 +119,10 @@ nav ul{
 
 textarea {
     height: 10em;
+}
+
+@media all and (max-width: 750px) {
+    #containerDiv{
+        flex-direction: column;
+    }
 }
