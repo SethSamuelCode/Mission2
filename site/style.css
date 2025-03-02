@@ -68,8 +68,7 @@ opacity: .75;
 fieldset {
     display: flex;
     flex-direction: column;
-
-
+    border: none;
 }
 
 form{
@@ -89,6 +88,15 @@ form{
     top: 50%;
     transform: translate(-50%,-50%);
     border-radius: 1em;
+}
+
+#newNoteDialog label,legend{
+    font-size: 1.2em;
+    padding: .3em .3em;
+}
+
+legend{
+    font-size: 1.5em;
 }
 
 nav{
@@ -115,7 +123,7 @@ nav ul{
 
 .textInput{
     padding: .5em;
-    margin: .25em 0;
+    margin: .25em .3em;
     border-radius: .5em;
     border: 1px solid black;
 }
