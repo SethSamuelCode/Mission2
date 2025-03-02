@@ -90,13 +90,13 @@ newNoteButton.addEventListener("click", () => { //open the new note modal
   newNoteDialog.showModal();
 });
 
-newNoteDialogSaveButton.addEventListener("click", () =>{
+newNoteDialogSaveButton.addEventListener("click", () =>{ //button to save the note in the new note modal
   notebook.push(new Note(newNoteTitle.value,newNoteContents.value));
   draw()
 });
 
-sortButton.addEventListener("click",()=>{
-  // console.log("button click");
+sortButton.addEventListener("click",()=>{ //sorting functions
+
   switch (sortDirection.value){
   case "a-z": notebook.sort((a,b)=>{ //sort by Title A-Z
     return a.title.localeCompare(b.title);
