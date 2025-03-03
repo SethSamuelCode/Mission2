@@ -81,12 +81,30 @@ function draw() {
     const creationDate = document.createElement("p");
     creationDate.insertAdjacentText("afterbegin", note.creationTime.toLocaleString());
 
+    //div to hold edit and delete buttons
+    const editAndDeleteButtonClassName = "noteButtons"
+    const editAndDeleteDiv = document.createElement("div");
+    editAndDeleteDiv.classList.add("editAndDeleteDiv")
+    //edit note button 
+    const editNoteButton = document.createElement("button");
+    editNoteButton.id = "editNoteButton";
+    editNoteButton.classList.add(editAndDeleteButtonClassName)
+    editNoteButton.insertAdjacentText("afterbegin","Edit");
+    editAndDeleteDiv.append(editNoteButton)
+    //delete note button
+    const deleteNoteButton = document.createElement("button");
+    deleteNoteButton.id = "deleteNoteButton";
+    deleteNoteButton.insertAdjacentText("afterbegin","DELETE");
+    deleteNoteButton.classList.add(editAndDeleteButtonClassName)
+    editAndDeleteDiv.append(deleteNoteButton);
+
     //append everything in order
     div.append(h1);
     div.append(content);
     creationDateDiv.append(labelForCreationDate);
     creationDateDiv.append(creationDate);
     div.append(creationDateDiv);
+    div.append(editAndDeleteDiv)
     mainDiv.append(div);
   }
 }

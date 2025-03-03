@@ -42,9 +42,9 @@ main{
 
 .note{
     background-color: var(--color-note);
-    padding: 2em;
+    padding: 2em 2em 1em 2em;
     border-radius:2em ;
-    margin: .25em
+    margin: .25em;
     
 }
 .note > p{
@@ -58,6 +58,29 @@ main{
 
 .creationDate{
     padding-top: 1em;
+}
+
+.editAndDeleteDiv{
+    display: flex;
+}
+.editAndDeleteDiv button{
+    flex-grow: 1;
+    width: 50%;
+    border: none;
+    cursor: pointer;
+
+} 
+.editAndDeleteDiv button:hover {
+    opacity: 80%;
+}
+
+#editNoteButton{
+    background-color: greenyellow;
+}
+
+#deleteNoteButton{
+    background-color: crimson;
+    color: white;
 }
 
 ::backdrop {
