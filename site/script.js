@@ -70,6 +70,29 @@ function editNote(e) {
   };
 }
 
+function deleteNote(e){
+  e.preventDefault();
+  const key = new Date()
+  key.setTime(e.target.dataset.id) //set key to use to access indexedDB
+  console.log(`delete key = ${key}`)
+
+
+  const request = db
+    .transaction(objectStoreNameNotes, "readwrite")
+    .objectStore(objectStoreNameNotes)
+    .delete(key);
+    
+    request.onsuccess = () =>{
+      notebook.length = 0; //empty array https://stackoverflow.com/a/1232046
+      loadFromDB();
+    }
+
+    request.onerror = (e) =>{
+      alert(e)
+    }
+
+}
+
 function draw() {
   mainDiv.innerHTML = ""; //clear main div for redraw
 
@@ -126,6 +149,8 @@ function draw() {
     deleteNoteButton.classList.add("deleteNoteButton");
     deleteNoteButton.insertAdjacentText("afterbegin", "DELETE");
     deleteNoteButton.classList.add(editAndDeleteButtonClassName);
+    deleteNoteButton.dataset.id = note.creationTime.getTime(); //add creation time to find the note later
+    deleteNoteButton.addEventListener("click",deleteNote)
     editAndDeleteDiv.append(deleteNoteButton);
 
     //append everything in order
