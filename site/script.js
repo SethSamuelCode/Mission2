@@ -6,7 +6,7 @@
 
 class Note {
   //class for notes
-  constructor(title, text, creationTime=new Date()) {
+  constructor(title, text, creationTime = new Date()) {
     //takes title and note content
     this.title = title;
     this.note = text;
@@ -26,6 +26,7 @@ const notebook = []; //stores the notes
 let db; //for indexedDB
 const dbName = "notesDB"; //indexedDB database name
 const objectStoreNameNotes = "notebookObjectStore"; //indexedDB datastore name to store notes
+let objectStoreObject; //object store to clean up my code
 
 // ------------------- HTML SELECTORS ------------------- //
 const mainDiv = document.getElementsByTagName("main")[0]; //get main element
@@ -52,9 +53,8 @@ function editNote(e) {
     .objectStore(objectStoreNameNotes)
     .get(key); //get note from store
 
+  newNoteDialog.dataset.NoteId = e.target.dataset.id; //set the id so we can replace the notes
 
-  newNoteDialog.dataset.NoteId = e.target.dataset.id //set the id so we can replace the notes
-  
   request.onerror = (e) => {
     alert(e);
   };
@@ -70,27 +70,25 @@ function editNote(e) {
   };
 }
 
-function deleteNote(e){
+function deleteNote(e) {
   e.preventDefault();
-  const key = new Date()
-  key.setTime(e.target.dataset.id) //set key to use to access indexedDB
-  console.log(`delete key = ${key}`)
-
+  const key = new Date();
+  key.setTime(e.target.dataset.id); //set key to use to access indexedDB
+  console.log(`delete key = ${key}`);
 
   const request = db
     .transaction(objectStoreNameNotes, "readwrite")
     .objectStore(objectStoreNameNotes)
     .delete(key);
-    
-    request.onsuccess = () =>{
-      notebook.length = 0; //empty array https://stackoverflow.com/a/1232046
-      loadFromDB();
-    }
 
-    request.onerror = (e) =>{
-      alert(e)
-    }
+  request.onsuccess = () => {
+    notebook.length = 0; //empty array https://stackoverflow.com/a/1232046
+    loadFromDB();
+  };
 
+  request.onerror = (e) => {
+    alert(e);
+  };
 }
 
 function draw() {
@@ -119,6 +117,8 @@ function draw() {
     //note content
     const content = document.createElement("p");
     content.insertAdjacentText("afterbegin", note.note);
+    //div to hold creationDate and modification date
+    const createAndModDiv = document.createElement("div");
     //div to hold creation date
     const creationDateDiv = document.createElement("div");
     creationDateDiv.className = "creationDate";
@@ -131,11 +131,26 @@ function draw() {
       "afterbegin",
       note.creationTime.toLocaleString()
     );
+    createAndModDiv.append(creationDateDiv);
+    //modification time if exists
+    if (note.modTime) {
+      const modTimeDiv = document.createElement("div");
+      const modTimeLabel = document.createElement("p");
+      modTimeLabel.insertAdjacentText("afterbegin", "Modified:");
+      const modTimeTime = document.createElement("p");
+      modTimeTime.insertAdjacentText(
+        "afterbegin",
+        note.modTime.toLocaleString()
+      );
+      modTimeDiv.append(modTimeLabel);
+      modTimeDiv.append(modTimeTime);
+      createAndModDiv.append(modTimeDiv);
+    }
 
     //div to hold edit and delete buttons
     const editAndDeleteButtonClassName = "noteButtons";
-    const editAndDeleteDiv = document.createElement("div");
-    editAndDeleteDiv.classList.add("editAndDeleteDiv");
+    const editAndDeleteButtonDiv = document.createElement("div");
+    editAndDeleteButtonDiv.classList.add("editAndDeleteDiv");
     //edit note button
     const editNoteButton = document.createElement("button");
     editNoteButton.classList.add("editNoteButton");
@@ -143,23 +158,23 @@ function draw() {
     editNoteButton.insertAdjacentText("afterbegin", "Edit");
     editNoteButton.dataset.id = note.creationTime.getTime(); //add the creation time as an id so we can find the note
     editNoteButton.addEventListener("click", editNote);
-    editAndDeleteDiv.append(editNoteButton);
+    editAndDeleteButtonDiv.append(editNoteButton);
     //delete note button
     const deleteNoteButton = document.createElement("button");
     deleteNoteButton.classList.add("deleteNoteButton");
     deleteNoteButton.insertAdjacentText("afterbegin", "DELETE");
     deleteNoteButton.classList.add(editAndDeleteButtonClassName);
     deleteNoteButton.dataset.id = note.creationTime.getTime(); //add creation time to find the note later
-    deleteNoteButton.addEventListener("click",deleteNote)
-    editAndDeleteDiv.append(deleteNoteButton);
+    deleteNoteButton.addEventListener("click", deleteNote);
+    editAndDeleteButtonDiv.append(deleteNoteButton);
 
     //append everything in order
     div.append(h1);
     div.append(content);
     creationDateDiv.append(labelForCreationDate);
     creationDateDiv.append(creationDate);
-    div.append(creationDateDiv);
-    div.append(editAndDeleteDiv);
+    div.append(createAndModDiv);
+    div.append(editAndDeleteButtonDiv);
     mainDiv.append(div);
   }
 }
@@ -243,16 +258,22 @@ newNoteDialogSaveButton.addEventListener("click", (e) => {
   //button to save the note in the new note modal
   // e.preventDefault();//stop the window closing if the note doesnt save to IndexedDB
   if (newNoteDialog.dataset.editNote) {
-    const creationDate  = new Date();
+    const creationDate = new Date();
     creationDate.setTime(newNoteDialog.dataset.NoteId);
-    const tempNote = new Note(newNoteTitle.value,newNoteContents.value,creationDate)
+    const tempNote = new Note(
+      newNoteTitle.value,
+      newNoteContents.value,
+      creationDate
+    );
     tempNote.modTime = new Date();
-    const updateRequest = db.transaction(objectStoreNameNotes,"readwrite").objectStore(objectStoreNameNotes).put(tempNote,creationDate)
-    notebook.length = 0; // clears the array https://stackoverflow.com/a/1232046 
-    loadFromDB(); 
-    newNoteDialog.dataset.editNote=false;
-    newNoteDialog.dataset.NoteId= 0;
-
+    const updateRequest = db
+      .transaction(objectStoreNameNotes, "readwrite")
+      .objectStore(objectStoreNameNotes)
+      .put(tempNote, creationDate);
+    notebook.length = 0; // clears the array https://stackoverflow.com/a/1232046
+    loadFromDB();
+    newNoteDialog.dataset.editNote = false;
+    newNoteDialog.dataset.NoteId = 0;
   } else {
     const tempNote = new Note(newNoteTitle.value, newNoteContents.value);
     notebook.push(tempNote); //save note into working array
@@ -288,37 +309,45 @@ sortDirection.addEventListener("click", () => {
         return a.creationTime - b.creationTime; //opposite of above
       });
       break;
-    case "modFirst": 
-      notebook.sort((a,b)=>{
-        if(a.modTime&&b.modTime){ //if the mod times exist see who was made earlier 
-          return b.modTime - a.modTime
-        } 
-        if(!a.modTime&&!b.modTime){ //mod times dont exist for either
-          return b.creationTime -a.creationTime;
+    case "modFirst":
+      notebook.sort((a, b) => {
+        if (a.modTime && b.modTime) {
+          //if the mod times exist see who was made earlier
+          return b.modTime - a.modTime;
         }
-        if (!a.modTime&&b.modTime){ // a has no modification time
-          return b.modTime - a.creationTime; 
+        if (!a.modTime && !b.modTime) {
+          //mod times dont exist for either
+          return b.creationTime - a.creationTime;
         }
-        if(a.modTime&&!b.modTime){ //b has no modification time
+        if (!a.modTime && b.modTime) {
+          // a has no modification time
+          return b.modTime - a.creationTime;
+        }
+        if (a.modTime && !b.modTime) {
+          //b has no modification time
           return b.creationTime - a.modTime;
         }
       });
       break;
-      case "modLast": 
-      notebook.sort((a,b)=>{
-        if(a.modTime&&b.modTime){ //if the mod times exist see who was made earlier 
-          return a.modTime - b.modTime
-        } 
-        if(!a.modTime&&!b.modTime){ //mod times dont exist for either
-          return a.creationTime -b.creationTime;
+    case "modLast":
+      notebook.sort((a, b) => {
+        if (a.modTime && b.modTime) {
+          //if the mod times exist see who was made earlier
+          return a.modTime - b.modTime;
         }
-        if (!a.modTime&&b.modTime){ // a has no modification time
-          return a.creationTime -b.modTime ; 
+        if (!a.modTime && !b.modTime) {
+          //mod times dont exist for either
+          return a.creationTime - b.creationTime;
         }
-        if(a.modTime&&!b.modTime){ //b has no modification time
-          return  a.modTime - b.creationTime;
+        if (!a.modTime && b.modTime) {
+          // a has no modification time
+          return a.creationTime - b.modTime;
         }
-      })
+        if (a.modTime && !b.modTime) {
+          //b has no modification time
+          return a.modTime - b.creationTime;
+        }
+      });
   }
   draw();
 });
