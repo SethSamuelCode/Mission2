@@ -69,11 +69,13 @@ fieldset {
     display: flex;
     flex-direction: column;
     border: none;
+    height: 100%;
 }
 
 form{
     padding: .5em;
     padding-top: 1em;
+    height: 100%;
 
 }
 
@@ -88,6 +90,11 @@ form{
     top: 50%;
     transform: translate(-50%,-50%);
     border-radius: 1em;
+}
+
+textarea {
+    height: 100%;
+
 }
 
 #newNoteDialog label,legend{
@@ -171,10 +178,7 @@ nav ul{
     flex-direction: column;
 }
 
-textarea {
-    height: 18em;
 
-}
 
 @media all and (max-width: 750px) {
     #containerDiv{

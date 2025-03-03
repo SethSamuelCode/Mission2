@@ -1,3 +1,8 @@
+// ------------------------ DEBUG ----------------------- //
+//uncomment to turn off console logs 
+console.log = (x)=>{} 
+
+
 // ----------------------- OBJECTS ---------------------- //
 
 class Note {
@@ -127,9 +132,6 @@ function loadFromDB(){ //load data from IndexedDB
     console.log("Draw from loadDB")
   })
 
- 
-  
-  
 }
 
 function saveToDB(newNote){
