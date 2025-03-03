@@ -94,10 +94,11 @@ function connectToDB(){ //connect to indexedDB for saving and loading notes
   });
 
   openRequest.addEventListener("success",()=>{ //connects successfully with out issue
-    console.log("IndexedDB opened successfully")
+    
     db = openRequest.result; //so we can use the IndexedDB later
     loadFromDB()
     draw()
+    console.log("IndexedDB opened successfully")
   });
 
   openRequest.addEventListener("upgradeneeded",(e)=>{ //connects but db is either not created or needs to be updated
@@ -115,13 +116,19 @@ function loadFromDB(){ //load data from IndexedDB
   const objectStore = db.transaction(objectStoreNameNotes).objectStore(objectStoreNameNotes);
   objectStore.openCursor().addEventListener("success",(e)=>{
     const cursor = e.target.result;
+    console.log("loading from IndexedDB")
 
     if(cursor){
       notebook.push(cursor.value);
+      console.log(cursor.value)
       cursor.continue();
     } 
+    draw()
+    console.log("Draw from loadDB")
   })
-  draw()
+
+ 
+  
   
 }
 
@@ -194,8 +201,6 @@ noteEditCancelButton.addEventListener("click",(e)=>{
 // notebook.push(new Note("title again", "this is text is bomb"));
 // notebook.push(new Note("3RD note", "this is the text for the 3rd note"));
 
-connectToDB();
-
 //set fonts
 document.querySelector("body").className= "noto-serif-georgian-body";
-
+connectToDB();
