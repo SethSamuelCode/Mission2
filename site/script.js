@@ -288,6 +288,37 @@ sortDirection.addEventListener("click", () => {
         return a.creationTime - b.creationTime; //opposite of above
       });
       break;
+    case "modFirst": 
+      notebook.sort((a,b)=>{
+        if(a.modTime&&b.modTime){ //if the mod times exist see who was made earlier 
+          return b.modTime - a.modTime
+        } 
+        if(!a.modTime&&!b.modTime){ //mod times dont exist for either
+          return b.creationTime -a.creationTime;
+        }
+        if (!a.modTime&&b.modTime){ // a has no modification time
+          return b.modTime - a.creationTime; 
+        }
+        if(a.modTime&&!b.modTime){ //b has no modification time
+          return b.creationTime - a.modTime;
+        }
+      });
+      break;
+      case "modLast": 
+      notebook.sort((a,b)=>{
+        if(a.modTime&&b.modTime){ //if the mod times exist see who was made earlier 
+          return a.modTime - b.modTime
+        } 
+        if(!a.modTime&&!b.modTime){ //mod times dont exist for either
+          return a.creationTime -b.creationTime;
+        }
+        if (!a.modTime&&b.modTime){ // a has no modification time
+          return a.creationTime -b.modTime ; 
+        }
+        if(a.modTime&&!b.modTime){ //b has no modification time
+          return  a.modTime - b.creationTime;
+        }
+      })
   }
   draw();
 });
