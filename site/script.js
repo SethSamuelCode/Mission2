@@ -1,6 +1,6 @@
 // ------------------------ DEBUG ----------------------- //
 //uncomment to turn off console logs 
-console.log = (x)=>{} 
+// console.log = (x)=>{} 
 
 
 // ----------------------- OBJECTS ---------------------- //
@@ -41,8 +41,31 @@ const sortButton = document.querySelector("#sortForm input"); //sort button on m
 const sortDirection = document.querySelector("#sortBySelect") //sort type dropdown 
 const noteEditCancelButton = document.querySelector("#noteEditCancelButton")//cancel button in note edit dialog
 
-
 // ---------------------- FUNCTIONS ---------------------- //
+
+function editNote(e){
+  e.preventDefault();
+  // console.log(e.target)
+  // console.log(e.target.dataset.id)
+  const key = new Date(); //create a date object to use as my key to access indexedDB
+  key.setTime(e.target.dataset.id) //set my key to the same time as the note
+  console.log(key)
+  const request = db.transaction(objectStoreNameNotes,"readonly").objectStore(objectStoreNameNotes).get(key); //get note from store
+  
+  request.onerror = (e)=>{
+    alert(e)
+  }
+
+  request.onsuccess = (e) =>{ //set note edit dialog to the content of the note and show it. 
+    const oldNote = e.target.result;
+    console.log(e.target.result)
+    newNoteTitle.value =oldNote.title;
+    newNoteContents.value = oldNote.note;
+    newNoteDialog.showModal();
+  }
+
+}
+
 
 function draw() {
 
@@ -87,13 +110,15 @@ function draw() {
     editAndDeleteDiv.classList.add("editAndDeleteDiv")
     //edit note button 
     const editNoteButton = document.createElement("button");
-    editNoteButton.id = "editNoteButton";
+    editNoteButton.classList.add("editNoteButton");
     editNoteButton.classList.add(editAndDeleteButtonClassName)
     editNoteButton.insertAdjacentText("afterbegin","Edit");
+    editNoteButton.dataset.id = note.creationTime.getTime(); //add the creation time as an id so we can find the note
+    editNoteButton.addEventListener("click",editNote) 
     editAndDeleteDiv.append(editNoteButton)
     //delete note button
     const deleteNoteButton = document.createElement("button");
-    deleteNoteButton.id = "deleteNoteButton";
+    deleteNoteButton.classList.add("deleteNoteButton");
     deleteNoteButton.insertAdjacentText("afterbegin","DELETE");
     deleteNoteButton.classList.add(editAndDeleteButtonClassName)
     editAndDeleteDiv.append(deleteNoteButton);
@@ -143,7 +168,7 @@ function loadFromDB(){ //load data from IndexedDB
 
     if(cursor){
       notebook.push(cursor.value);
-      console.log(cursor.value)
+      console.log(cursor.value.creationTime)
       cursor.continue();
     } 
     draw()
@@ -213,6 +238,8 @@ noteEditCancelButton.addEventListener("click",(e)=>{
   e.preventDefault()// stop the form from being submitted
   newNoteDialog.close();
 })
+
+
 
 // ------------------ SCRIPT ENTRYPOINT ----------------- //
 

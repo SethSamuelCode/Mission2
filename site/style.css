@@ -74,11 +74,11 @@ main{
     opacity: 80%;
 }
 
-#editNoteButton{
+.editNoteButton{
     background-color: greenyellow;
 }
 
-#deleteNoteButton{
+.deleteNoteButton{
     background-color: crimson;
     color: white;
 }
