@@ -46,7 +46,8 @@ function editNote(e) {
     .transaction(objectStoreNameNotes, "readonly")
     .objectStore(objectStoreNameNotes)
     .get(key); //get note from store
-
+    newNoteDialog.dataset.NoteId = e.target.dataset.id; //set the id so we can load the correct note
+    
   request.onerror = (e) => {
     alert(e);
   };
@@ -57,7 +58,6 @@ function editNote(e) {
     console.log(e.target.result);
     newNoteTitle.value = oldNote.title; //set the title in the note edit modal
     newNoteContents.value = oldNote.note; // set the note content in the note edit modal
-    newNoteDialog.dataset.NoteId = e.target.dataset.id; //set the id so we can load the correct note
     newNoteDialog.dataset.editNote = true; //change the behavior of the new note dialog
     newNoteDialog.showModal(); //show the note edit modal
   };
