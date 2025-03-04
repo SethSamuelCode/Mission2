@@ -1,3 +1,4 @@
+/* ------------------------ MAIN ------------------------ */
 :root{
     --color-note:hsl(180, 50%, 50%)
 }
@@ -16,20 +17,15 @@
     font-weight: 400;
     font-style: normal;
     font-variation-settings:
-      "wdth" 100;    
-  }
-  
+    "wdth" 100;    
+}
+
 
 header{
     text-align: center;
     padding: 1em 2em;
     background-color: hsl(271, 40%, 53%);
     font-size: 2em;
-}
-
-#containerDiv{
-    display: flex;
-    justify-content: flex-start;
 }
 
 main{
@@ -40,6 +36,29 @@ main{
     flex-wrap: wrap;
 }
 
+#containerDiv{
+    display: flex;
+    justify-content: flex-start;
+}
+/* ----------------------- NAV BAR ---------------------- */
+
+.navElement{
+    display: block;
+    padding: 1em;
+}
+
+#sortBySelect{
+    padding: .5em;
+    border-radius: .25em;
+    border: none;
+    font-size: 1em;
+}
+
+#sortForm{
+    display: flex;
+    flex-direction: column;
+}
+/* ------------------------ NOTES ----------------------- */
 .note{
     background-color: var(--color-note);
     padding: 2em 2em 1em 2em;
@@ -82,6 +101,8 @@ main{
     background-color: crimson;
     color: white;
 }
+
+/* ------------------------ MODAL ----------------------- */
 
 ::backdrop {
 background-color: rgb(247, 200, 200);
@@ -139,17 +160,6 @@ nav ul{
     flex-direction: column;
 
 }
-.navElement{
-    display: block;
-    padding: 1em;
-}
-#sortBySelect{
-    padding: .5em;
-    border-radius: .25em;
-    border: none;
-    font-size: 1em;
-
-}
 
 .textInput{
     padding: .5em;
@@ -196,11 +206,9 @@ nav ul{
     background-color: rgb(250, 167, 167);
 }
 
-#sortForm{
-    display: flex;
-    flex-direction: column;
-}
 
+
+/* --------------------- RESPONSIVE --------------------- */
 
 
 @media all and (max-width: 750px) {
