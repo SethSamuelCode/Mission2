@@ -5,6 +5,8 @@ As such i have done so.
 
 website can be found under /site
 
+website can be seen at: [https://mission2.sethsamuel.online](https://mission2.sethsamuel.online/) 
+
 ## MISSION 2 REQUIREMENTS 
 
 |Requirement|Completed|
