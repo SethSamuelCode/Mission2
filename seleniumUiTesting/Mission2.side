@@ -1,0 +1,207 @@
+{
+  "id": "9b4976a7-e9fd-498b-a751-d4790f3e5485",
+  "version": "2.0",
+  "name": "Mission2",
+  "url": "http://127.0.0.1:5503/site/index.html",
+  "tests": [{
+    "id": "38952059-f3ac-483b-8100-90fdb2d943c0",
+    "name": "testEdit",
+    "commands": [{
+      "id": "9761e91e-de03-4861-abc3-41e0ac26d94d",
+      "comment": "",
+      "command": "open",
+      "target": "/site/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3b7ce4cf-3db1-4928-abdb-91d4d4a84ac2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "550x691",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ae724992-571f-4456-93c5-cbf020f3bf22",
+      "comment": "",
+      "command": "click",
+      "target": "css=.note:nth-child(1) .editNoteButton",
+      "targets": [
+        ["css=.note:nth-child(1) .editNoteButton", "css:finder"],
+        ["xpath=//div[@id='containerDiv']/main/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Edit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ba0d95b7-afbe-47e7-af55-61db1ccf3c96",
+      "comment": "",
+      "command": "click",
+      "target": "name=note",
+      "targets": [
+        ["name=note", "name"],
+        ["css=.textInput:nth-child(5)", "css:finder"],
+        ["xpath=//textarea[@name='note']", "xpath:attributes"],
+        ["xpath=//dialog[@id='newNoteDialog']/form/fieldset/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1d1e84b4-29d5-4236-9abb-3bc0782892f2",
+      "comment": "",
+      "command": "type",
+      "target": "name=note",
+      "targets": [
+        ["name=note", "name"],
+        ["css=.textInput:nth-child(5)", "css:finder"],
+        ["xpath=//textarea[@name='note']", "xpath:attributes"],
+        ["xpath=//dialog[@id='newNoteDialog']/form/fieldset/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "world11"
+    }, {
+      "id": "84efe03b-f448-4706-a588-e767fa5706d0",
+      "comment": "",
+      "command": "click",
+      "target": "id=noteEditSaveButton",
+      "targets": [
+        ["id=noteEditSaveButton", "id"],
+        ["css=#noteEditSaveButton", "css:finder"],
+        ["xpath=//button[@id='noteEditSaveButton']", "xpath:attributes"],
+        ["xpath=//dialog[@id='newNoteDialog']/form/fieldset/button", "xpath:idRelative"],
+        ["xpath=//fieldset/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1bb10fd6-b1f9-4752-a854-9dfe381a9665",
+    "name": "new note",
+    "commands": [{
+      "id": "083145f1-89a2-4d14-b76f-d607cef206c0",
+      "comment": "",
+      "command": "open",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f27e0f74-0151-4c05-ba13-1ac92313902b",
+      "comment": "",
+      "command": "click",
+      "target": "id=newNoteButton",
+      "targets": [
+        ["id=newNoteButton", "id"],
+        ["css=#newNoteButton", "css:finder"],
+        ["xpath=//p[@id='newNoteButton']", "xpath:attributes"],
+        ["xpath=//div[@id='containerDiv']/nav/ul/li/p", "xpath:idRelative"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'New Note')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0b34eb78-7bcf-4946-8a0f-4e5ff4269dfe",
+      "comment": "",
+      "command": "type",
+      "target": "name=title",
+      "targets": [
+        ["name=title", "name"],
+        ["css=.textInput:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='title']", "xpath:attributes"],
+        ["xpath=//dialog[@id='newNoteDialog']/form/fieldset/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "new t"
+    }, {
+      "id": "9e81abf5-64a7-48ea-ad41-16d316212bdc",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "name=title",
+      "targets": [
+        ["name=title", "name"],
+        ["css=.textInput:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='title']", "xpath:attributes"],
+        ["xpath=//dialog[@id='newNoteDialog']/form/fieldset/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "${KEY_DOWN}"
+    }, {
+      "id": "0cb65d61-51be-4620-883f-fae3c0a12eeb",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "name=title",
+      "targets": [
+        ["name=title", "name"],
+        ["css=.textInput:nth-child(3)", "css:finder"],
+        ["xpath=//input[@name='title']", "xpath:attributes"],
+        ["xpath=//dialog[@id='newNoteDialog']/form/fieldset/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "${KEY_TAB}"
+    }, {
+      "id": "bbd92a3d-6dfd-435f-afed-38840cb2bff1",
+      "comment": "",
+      "command": "click",
+      "target": "id=noteEditSaveButton",
+      "targets": [
+        ["id=noteEditSaveButton", "id"],
+        ["css=#noteEditSaveButton", "css:finder"],
+        ["xpath=//button[@id='noteEditSaveButton']", "xpath:attributes"],
+        ["xpath=//dialog[@id='newNoteDialog']/form/fieldset/button", "xpath:idRelative"],
+        ["xpath=//fieldset/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "90503dc4-6f15-426c-bdbc-a892da7786bb",
+    "name": "delete note",
+    "commands": [{
+      "id": "0e6b671b-59a9-4552-a467-e13116d224d6",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5503/site/index.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3daaa009-a72a-419e-82c2-39bc4901856e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "680x794",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4b707c52-b52d-49ec-b868-714442a156c9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.note:nth-child(1) .deleteNoteButton",
+      "targets": [
+        ["css=.note:nth-child(1) .deleteNoteButton", "css:finder"],
+        ["xpath=//div[@id='containerDiv']/main/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'DELETE')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "09d26516-827f-4a78-938d-48a2a88867fb",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.note:nth-child(1) .deleteNoteButton",
+      "targets": [
+        ["css=.note:nth-child(1) .deleteNoteButton", "css:finder"],
+        ["xpath=//div[@id='containerDiv']/main/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'DELETE')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e78616d0-037d-4271-b7e0-4d1b0936fa14",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["38952059-f3ac-483b-8100-90fdb2d943c0"]
+  }],
+  "urls": ["http://127.0.0.1:5503/", "http://127.0.0.1:5503/site/index.html"],
+  "plugins": []
+}

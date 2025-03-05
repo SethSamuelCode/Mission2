@@ -1,3 +1,4 @@
+"use strict"
 // ------------------------ DEBUG ----------------------- //
 //uncomment to turn off console logs comment to turn them back on
 // console.log = (x)=>{}
@@ -48,11 +49,11 @@ function editNote(e) {
     .get(key); //get note from store
     newNoteDialog.dataset.NoteId = e.target.dataset.id; //set the id so we can load the correct note
     
-  request.onerror = (e) => {
-    alert(e);
-  };
-
-  request.onsuccess = (e) => {
+    request.onerror = (e) => {
+      alert(e);
+    };
+    
+    request.onsuccess = (e) => {
     //set note edit dialog to the content of the note and show it.
     const oldNote = e.target.result; //save the note we want from IndexedDB
     console.log(e.target.result);
