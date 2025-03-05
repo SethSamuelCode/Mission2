@@ -2,7 +2,7 @@ name: actions hello world
 on:
   push:
     branches:
-    - releases/v1.*
+    - release/v1.*
 jobs:
   build:
       name: Build
